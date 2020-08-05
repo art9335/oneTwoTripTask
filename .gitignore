@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Compiled class file
 *.class
 
@@ -23,9 +24,15 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 =======
+=======
+>>>>>>> 8a74f61bfbbcc1898c279595843b269afc7f805a
 .idea/
 .allure/
 build/
 target/
+<<<<<<< HEAD
 *.iml
 >>>>>>> 8a74f61... тестовая версия
+=======
+*.iml
+>>>>>>> 8a74f61bfbbcc1898c279595843b269afc7f805a
