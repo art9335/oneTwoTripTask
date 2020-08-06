@@ -16,10 +16,6 @@ public class BaseApiPretest {
 
 
 
-    /*
-     * возможнные проверки:
-     * 1) Позитивная - ввод слова "Москва", проверка корректности тела ответа
-     * 2) Позитивная - проверка что М */
 
 
 
@@ -45,10 +41,9 @@ public class BaseApiPretest {
 
         }
 
-        //System.out.println(cityNames + " длина  " + cityNames.size());
         if (cityNames.size() > 1) {
             for (int k = 0; k < cityNames.size() - 1; k++ ) {
-                //System.out.println(k);
+
                 Assert.assertEquals(false, cityNames.get(k).equals(cityNames.get(k + 1)));
             }
 

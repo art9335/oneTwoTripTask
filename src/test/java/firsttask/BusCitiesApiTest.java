@@ -83,6 +83,7 @@ public class BusCitiesApiTest  extends BaseApiPretest {
                 forApiTest.fullStringConding(testData.bigCityName));
         responseResult = forApiTest.makeHttpResponse(urlForRequest);
         statusCodeAssertion(responseResult, testData.keyStatusCode);
+        System.out.println(forApiTest.getKeySet(responseResult).toString() + "  " + testData.successKeyArray.toString() );
         Assert.assertEquals(forApiTest.getKeySet(responseResult).toString(), testData.successKeyArray.toString());
     }
 
@@ -204,13 +205,15 @@ public class BusCitiesApiTest  extends BaseApiPretest {
         ArrayList<String> cityNames = new ArrayList<>();
 
         for (int i = 0; i < searchParameter.length; i++) {
-            //System.out.println(searchParameter[i]);
+            System.out.println(searchParameter[i]);
             String hexData = forApiTest.fullStringConding(searchParameter[i]);
-
+            System.out.println(hexData);
             String urlForRequest = forApiTest.formatUrlForRequest(urlBase.redirectUrl,
                     forJquerry, hexData);
 
             JSONObject responseResult = forApiTest.makeHttpResponse(urlForRequest);
+            System.out.println("тест firstVariantAreEquals" + urlForRequest );
+            System.out.println(responseResult);
             JSONArray someArray = forApiTest.getJsonArray(responseResult, testData.keyValueToGetCityJson);
             checkSearchResults(responseResult, someArray, searchParameter[i]);
             statusCodeAssertion(responseResult, testData.keyStatusCode);

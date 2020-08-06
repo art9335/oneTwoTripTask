@@ -12,6 +12,8 @@ public class urlRedirectTest {
 
     String urlForCompare = "https://www.onetwotrip.com/";
 
+
+
     @Test
     public void forTestTask() {
         pageForTest.openPageForTest(urlBase.oneTwoTripUrl);
