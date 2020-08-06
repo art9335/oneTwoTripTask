@@ -1,6 +1,7 @@
 package pretestpackage;
 
 import firsttaskbase.BaseApiMethods;
+import io.qameta.allure.Step;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -22,7 +23,7 @@ public class BaseApiPretest {
 
 
 
-
+    @Step("Проверка результатов поиска ")
     public void checkSearchResults(JSONObject responseBody, JSONArray responseSubArray, String searchVariant) {
         //метод для удобства
         String cityName;
@@ -53,12 +54,12 @@ public class BaseApiPretest {
 
         }
     }
-
+    @Step("Проверка кода ответа")
     public void statusCodeAssertion(JSONObject response, String key) {
         String statusCodeValue = forApiTest.getValueByKey(response, key);
         Assert.assertEquals(Integer.parseInt(statusCodeValue), 200);
     }
-
+    @Step("Проверка ключей и корректности приходящего json")
     public void keyParameterAssertion (JSONObject arg) {
         JSONArray keyValues = forApiTest.getKeySet(arg);
         Assert.assertEquals(Long.valueOf(keyValues.length()), Long.valueOf(testData.lenghtOfCitiInfo));

@@ -17,10 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 public class BaseApiMethods {
-//    public static void main(String[] args) throws UnsupportedEncodingException {
-//        String someResult = fullStringConding("Ростов-На-Дону");
-//        System.out.println("Значение до кодировки - Мо" + " Значение после - " + someResult );
-//    }
+
 
     public String fullStringConding(String arg) throws UnsupportedEncodingException {
         String fullStringCode = "";
@@ -38,21 +35,6 @@ public class BaseApiMethods {
         return fullStringCode;
     }
 
-    public String splitWhitespase(String arg) {
-        String fullString = "";
-        for (int i = 0; i < arg.length();i++) {
-            String character = String.valueOf(arg.charAt(i));
-            if (character.equals(" ")) {
-                continue;
-            } else {
-                fullString = fullString.concat(character);
-            }
-
-
-        }
-        return fullString;
-
-    }
 
     public void compareElementsOfArray(ArrayList<String> arg) {
         String[] searchVariant =  new String[] {"М", "М", "М", "М", "М", "М"};
