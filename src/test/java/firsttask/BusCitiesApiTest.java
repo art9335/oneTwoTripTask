@@ -199,7 +199,8 @@ public class BusCitiesApiTest  extends BaseApiPretest {
     @Test
     public void firstVariantAreEquals() throws IOException, InterruptedException {
         /*в данном тесте происходит проверка на равенство того, что при клиентском вводе строки
-        * "М", "Мо", "Мос", "Моск", "Москв", "Москва" первые приходящие возможные варианты  эквивалентны*/
+        * "М", "Мо", "Мос", "Моск", "Москв", "Москва" первые приходящие возможные варианты  эквивалентны
+        * Так же проводятся проверки, аналогичные проверка в тесте на полный ввод*/
 
 
         String[] searchParameter = testData.searchVariant;
