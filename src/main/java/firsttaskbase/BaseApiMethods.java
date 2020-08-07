@@ -1,5 +1,6 @@
 package firsttaskbase;
 
+import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -151,22 +152,30 @@ public class BaseApiMethods {
 
     public JSONObject makeHttpResponse(String url) throws IOException {
         String result = "";
+        JSONObject responseBody = new JSONObject();
        // System.out.println("Url for response " + url);
-        HttpGet get = new HttpGet(url);
-        //System.out.println("Что отправляется в запросе " + jsonForPayload);
-        //post.setEntity(new StringEntity(jsonForPayload.toString()));
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        CloseableHttpResponse response = httpClient.execute(get);
-        //System.out.println(response.getStatusLine().getStatusCode());
-        String statusCode = String.valueOf(response.getStatusLine().getStatusCode());
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            HttpGet get = new HttpGet(url);
+            //System.out.println("Что отправляется в запросе " + jsonForPayload);
+            //post.setEntity(new StringEntity(jsonForPayload.toString()));
+
+            CloseableHttpResponse response = httpClient.execute(get);
+            //System.out.println(response.getStatusLine().getStatusCode());
+            String statusCode = String.valueOf(response.getStatusLine().getStatusCode());
 
 
-        result = EntityUtils.toString(response.getEntity());
-        JSONObject responseBody = new JSONObject(result/* строка result парсится в json*/);
-        responseBody.put("Status code", statusCode);
-        //System.out.println("Тело ответа в строку " + responseBody);
+            result = EntityUtils.toString(response.getEntity());
+            responseBody = new  JSONObject(result/* строка result парсится в json*/);
+            responseBody.put("Status code", statusCode);
+            //System.out.println("Тело ответа в строку " + responseBody);
+            if (statusCode.equals(String.valueOf(404))) {
+                throw new HttpResponseException(404, "Page Not Found");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return responseBody;
-
     }
 
 
