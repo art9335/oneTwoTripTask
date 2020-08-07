@@ -29,7 +29,7 @@ public class BusCitiesApiTest  extends BaseApiPretest {
     @DisplayName("Проверка на некорректный код символа")
     @Test
     public void incorrectSymbolCode() throws IOException, InterruptedException {
-        Thread.sleep(100);
+
         String hexValue;
         for (int i = 1040; i <= 1103; i++ ) {
             hexValue = forApiTest.toHexWithPersentFormat(forApiTest.getSymbolByNumber(1040));
@@ -52,7 +52,7 @@ public class BusCitiesApiTest  extends BaseApiPretest {
     @DisplayName("Проверка пустого ввода")
     @Test
     public void checkingEmptyInputData() throws IOException, InterruptedException {
-        Thread.sleep(100);
+
         /*В данном тесте проверка отправки пустого запроса и корректности вывода данных в таком случае -
         * 1-й город ближайший, следующие - по популярности*/
         urlForRequest = forApiTest.formatUrlForRequest(urlBase.redirectUrl,
@@ -76,7 +76,7 @@ public class BusCitiesApiTest  extends BaseApiPretest {
     @DisplayName("Проверка длинного ввода")
     @Test
     public void checkingBigInputData() throws IOException, InterruptedException {
-        Thread.sleep(100);
+
         String hashResult = new String();
         System.out.println(hashResult);
         urlForRequest = forApiTest.formatUrlForRequest(urlBase.redirectUrl, forJquerry,
@@ -94,7 +94,7 @@ public class BusCitiesApiTest  extends BaseApiPretest {
     @DisplayName("Проверка на корректность приема чисел")
     @Test
     public void intSearch() throws IOException, InterruptedException {
-        Thread.sleep(100);
+
         /*в данном тесте проводится проверка на корректность приема цифр*/
         for (int i = 0; i < 10; i++) {
             urlForRequest = forApiTest.formatUrlForRequest(urlBase.redirectUrl,
@@ -110,7 +110,7 @@ public class BusCitiesApiTest  extends BaseApiPretest {
     @DisplayName("Проверка на регистр")
     @Test
     public void registerChecking() throws IOException, InterruptedException {
-        Thread.sleep(100);
+
         /*в данном тесте проводится проверка на то, что поиск не зависит от регистра*/
         String hexData;
         for (int i = 0; i < testData.registerNameArray.length; i ++) {
@@ -135,7 +135,7 @@ public class BusCitiesApiTest  extends BaseApiPretest {
     @DisplayName("Тест на ошибку ввода - первые символы английские")
     @Test
     public void incorrectCity() throws IOException, InterruptedException {
-        Thread.sleep(100);
+
         //в данном тесте первые три символа названия - в английской раскладке, проводится проверка на код ошибки
         String hexData = forApiTest.fullStringConding(testData.engSingleSearchTown);
         urlForRequest = forApiTest.formatUrlForRequest(urlBase.redirectUrl, forJquerry, hexData);
@@ -154,7 +154,7 @@ public class BusCitiesApiTest  extends BaseApiPretest {
     @DisplayName("Поиск по полному имени города")
     @Test
     public void singleTownSearch() throws IOException, InterruptedException {
-        Thread.sleep(100);
+
         /*
         * в данном тесте проводится поиск по трем различным вариациям имени города
         * 1) из одного слова
@@ -198,22 +198,22 @@ public class BusCitiesApiTest  extends BaseApiPretest {
     @DisplayName("Проверка на равенство первых вариантов")
     @Test
     public void firstVariantAreEquals() throws IOException, InterruptedException {
-        Thread.sleep(100);
+        /*в данном тесте происходит проверка на равенство того, что при клиентском вводе строки
+        * "М", "Мо", "Мос", "Моск", "Москв", "Москва" первые приходящие возможные варианты  эквивалентны*/
+
 
         String[] searchParameter = testData.searchVariant;
 
         ArrayList<String> cityNames = new ArrayList<>();
 
         for (int i = 0; i < searchParameter.length; i++) {
-            System.out.println(searchParameter[i]);
+            //System.out.println(searchParameter[i]);
             String hexData = forApiTest.fullStringConding(searchParameter[i]);
             System.out.println(hexData);
             String urlForRequest = forApiTest.formatUrlForRequest(urlBase.redirectUrl,
                     forJquerry, hexData);
 
             JSONObject responseResult = forApiTest.makeHttpResponse(urlForRequest);
-            System.out.println("тест firstVariantAreEquals" + urlForRequest );
-            System.out.println(responseResult);
             JSONArray someArray = forApiTest.getJsonArray(responseResult, testData.keyValueToGetCityJson);
             checkSearchResults(responseResult, someArray, searchParameter[i]);
             statusCodeAssertion(responseResult, testData.keyStatusCode);
@@ -224,7 +224,6 @@ public class BusCitiesApiTest  extends BaseApiPretest {
             //System.out.println("someArray.getJSONObject(0) " + someArray.getJSONObject(0));
             JSONObject cityInfo = someArray.getJSONObject(0);
             String cityName = cityInfo.getString(testData.keyValueOfCityName);
-
             cityNames.add(cityName);
 
         }
